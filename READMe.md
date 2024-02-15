@@ -45,7 +45,7 @@ To demonstrate SSE, we'll create a simple endpoint through ```StreamController``
 - The produces = MediaType.TEXT_EVENT_STREAM_VALUE attribute in @GetMapping specifies that this endpoint produces an event stream.
 - Flux.interval(Duration.ofSeconds(1)) generates a sequence that emits long values starting with 0 and incrementing at specified time intervals (every second in this case).
 
-#### Common use-cased of SSE
+#### Common use-cases of SSE
 - Real-time notifications: Informing users about new messages, updates, or events as soon as they occur.
 - Live feeds: Streaming live data such as news updates, sports scores, or social media feeds.
 - Monitoring dashboards: Displaying real-time metrics or logs for system monitoring tools.
