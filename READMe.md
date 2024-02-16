@@ -64,3 +64,8 @@ Spring WebFlux, built on Project Reactor that inherently supports backpressure t
 Backpressure allows consumers to control the flow of data, requesting more data only when they are ready to process it.
 
 Take a look at StreamController `/data-stream` endpoint and `DataStreamClient`
+
+### WebClient
+Provides a way to perform HTTP operations asynchronously and supports both synchronous and asynchronous request processing.
+
+Take a look at ```DataStreamClient```
