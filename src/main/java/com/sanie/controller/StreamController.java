@@ -15,4 +15,10 @@ public class StreamController {
         return Flux.interval(Duration.ofSeconds(1))
                 .map(seq -> "Time now is: " + LocalDateTime.now());
     }
+
+    @GetMapping(value = "/data-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Integer> dataStream() {
+        return Flux.range(1, 1000) // produces 1000 numbers starting from 1
+                .delayElements(Duration.ofMillis(1)); // delays each element to simulate a fast data stream
+    }
 }

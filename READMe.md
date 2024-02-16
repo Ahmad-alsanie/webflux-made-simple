@@ -54,3 +54,13 @@ To demonstrate SSE, we'll create a simple endpoint through ```StreamController``
 - Client Reconnection: Browsers automatically try to reconnect to the SSE stream if the connection is lost. However, you should handle reconnections gracefully in non-browser clients.
 - Error Handling: Implement error handling in your stream to manage any exceptions that may occur during data generation or processing.
 - Resource Management: Be mindful of resource usage, as keeping many connections open simultaneously can be resource-intensive.
+
+
+### Backpressure
+In reactive streams, backpressure is a mechanism that allows subscribers to signal to producers how much data they are prepared to process, preventing them from being overwhelmed.
+
+#### Implementing Backpressure
+Spring WebFlux, built on Project Reactor that inherently supports backpressure through its reactive types Flux and Mono.
+Backpressure allows consumers to control the flow of data, requesting more data only when they are ready to process it.
+
+Take a look at StreamController `/data-stream` endpoint and `DataStreamClient`
