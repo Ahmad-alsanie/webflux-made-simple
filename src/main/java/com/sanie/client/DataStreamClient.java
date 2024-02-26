@@ -2,7 +2,6 @@ package com.sanie.client;
 
 import com.sanie.model.Product;
 import org.reactivestreams.Subscription;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,35 +14,33 @@ public class DataStreamClient {
 
     private final WebClient webClient;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
-
     public DataStreamClient(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
     }
 
     public Flux<Product> getAllProducts() {
-        return webClientBuilder.build().get()
-                .uri("http://example.com/api/products")
-                .retrieve() // initiates the request
-                .bodyToFlux(Product.class); // converts the response body to a Flux of Products
+        return this.webClient.get()
+                .uri("/products")
+                .retrieve()
+                .bodyToFlux(Product.class);
     }
 
     public Mono<Product> createProduct(Product product) {
-        return webClientBuilder.build().post()
-                .uri("http://example.com/api/products")
-                .bodyValue(product) // pass the product to be posted
+        return this.webClient.post()
+                .uri("/products")
+                .bodyValue(product)
                 .retrieve()
-                .bodyToMono(Product.class); // converts the response body to a Mono of Product
+                .bodyToMono(Product.class);
     }
 
     public Mono<Product> getProduct(String id) {
-        return webClientBuilder.build().get()
-                .uri("http://example.com/api/products/" + id)
+        return this.webClient.get()
+                .uri("/products/" + id)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> Mono.error(new RuntimeException("Not found")))
                 .bodyToMono(Product.class);
     }
+
 
 
 
