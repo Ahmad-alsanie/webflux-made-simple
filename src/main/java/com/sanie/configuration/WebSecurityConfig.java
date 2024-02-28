@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.MapReactiveUserDetailsServi
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -33,5 +35,11 @@ public class WebSecurityConfig {
                 .roles("USER")
                 .build();
         return new MapReactiveUserDetailsService(user);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // For simplicity in tests; not recommended for production!
+        return NoOpPasswordEncoder.getInstance();
     }
 }
